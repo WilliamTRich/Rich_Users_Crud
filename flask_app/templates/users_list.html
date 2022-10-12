@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block title %} Users List {% endblock %}
+{% block content %}
+    <h1>These are all of the users</h1>
+    <table class="table table-dark">
+        <thead>
+            <tr>
+                <th scope="col">First</th>
+                <th scope="col">Last</th>
+                <th scope="col">Email</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for user in users %}
+                <tr>
+                    <td>{{user['first_name']}}</td>
+                    <td>{{user['last_name']}}</td>
+                    <td>{{user['email']}}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+        </table>
+        <a href="/create_user" class="btn btn-primary text-center">Create User</a>
+{% endblock %}
