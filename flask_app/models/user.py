@@ -17,8 +17,27 @@ class User:
         for user in users_from_db:
             users.append(cls(user))
         return users
-    
+
+    @staticmethod
+    def get_one(userID):
+        query = 'SELECT * FROM users WHERE id = %(id)s;'
+        user_from_db = connectToMySQL('users_db').query_db(query, userID)
+        userInfo = []
+        for info in user_from_db:
+            userInfo.append(info)
+        return userInfo
+
+    @staticmethod
+    def delete(userID):
+        query = 'DELETE FROM users WHERE id = %(id)s;'
+        connectToMySQL('users_db').query_db(query, userID)
+
+    @classmethod
+    def edit(cls, data):
+        query = 'UPDATE users SET first_name = %(fname)s, last_name = %(lname)s, email = %(email)s, updated_at = NOW() WHERE id = %(id)s;'
+        return connectToMySQL('users_db').query_db(query, data)
+
     @classmethod
     def save(cls, data):
-        query = 'INSERT INTO users (first_name, last_name, email) VALUES ( %(fname)s, %(lname)s, %(email)s )'
+        query = 'INSERT INTO users (first_name, last_name, email) VALUES ( %(fname)s, %(lname)s, %(email)s );'
         return connectToMySQL('users_db').query_db(query, data)

@@ -8,6 +8,7 @@
                 <th scope="col">First</th>
                 <th scope="col">Last</th>
                 <th scope="col">Email</th>
+                <th scope="col">Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -16,6 +17,13 @@
                     <td>{{user['first_name']}}</td>
                     <td>{{user['last_name']}}</td>
                     <td>{{user['email']}}</td>
+                    <td>
+                        <div class="container">
+                            <a href="{{ url_for('show_user', userID=user['id']) }}">Show</a>
+                            <a href="{{ url_for('edit', userID=user['id']) }}">Edit</a>
+                            <a href="{{ url_for('delete', userID=user['id']) }}">Delete</a>
+                        </div>
+                    </td>
                 </tr>
             {% endfor %}
         </tbody>
